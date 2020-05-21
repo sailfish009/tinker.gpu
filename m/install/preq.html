@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Prerequisites &#8212; Tinker GPU User&#39;s Manual  documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Build the Canonical Tinker" href="tinker.html" />
+    <link rel="prev" title="Installation on Your Computer" href="index.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="prerequisites">
+<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h1>
+<p><strong>Hardware</strong></p>
+<p>A relatively recent Nvidia GPU is mandatory for the GPU code.
+Nothing special is needed for the CPU code.</p>
+<p><strong>Operating Systems and Compilers</strong></p>
+<p>In order to compile the GPU code, the most recent
+<a class="reference external" href="https://www.pgroup.com/products/community.htm">PGI compiler</a>
+for OpenACC directives is preferred. Due to the limitations of the PGI compiler,
+the GPU code is unavailable on macOS.</p>
+<p>No effort has been spared on building excutables for Windows yet.</p>
+<p>For Linux, we need:</p>
+<ul class="simple">
+<li><p>GNU or Intel Fortran compiler.</p></li>
+<li><p>Recent C++ compiler that supports C++11 syntax.</p></li>
+<li><p>(GPU code only) PGI compiler for OpenACC and nvcc for CUDA.</p></li>
+</ul>
+<p><strong>FFTW Libraries</strong></p>
+<p>Two prebuilt FFTW libraries: <cite>libfftw3</cite> and <cite>libfftw3_threads</cite> are used by
+Tinker. Two more FFTW libraries, <cite>libfftw3f</cite>, <cite>libfftw3f_threads</cite> are
+needed by the single precision CPU code.</p>
+<p><strong>More About Using PGI Compiler on the Clusters</strong></p>
+<p>I recently (in Jan. 2020) worked on a cluster that was still running
+Red Hat with gcc 4.8.5 by default without root privilege. Although several
+more recent gcc and PGI versions were available via the <cite>module</cite> program,
+the most recent PGI compiler (2019) was still configured with gcc 4.8.5
+by default, which had a very bad support for C++11.
+Since I didn’t have root privilege on the cluster, I had to use
+a custom <cite>localrc</cite> file by running the following command to
+reconfigure PGI compiler with gcc 7.4.0:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>makelocalrc <span class="nv">$PGI</span>/linux86-64-llvm/2019 <span class="se">\</span>
+-gcc /usr/local/gcc-7.4.0/bin/gcc <span class="se">\</span>
+-gpp /usr/local/gcc-7.4.0/bin/g++ <span class="se">\</span>
+-g77 /usr/local/gcc-7.4.0/bin/gfortran <span class="se">\</span>
+-o -net &gt; /path/to/new_config
+</pre></div>
+</div>
+<p>then added <cite>export PGI_LOCALRC=/path/to/new_config</cite> to my bash resource file.</p>
+<p><strong>Other Nonmandatory Utilities</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://clang.llvm.org/docs/ClangFormat.html">ClangFormat</a>:
+to format the source code.</p></li>
+<li><p><a class="reference external" href="https://www.sphinx-doc.org">Sphinx</a> and TeX: to generate user’s manual.</p></li>
+<li><p><a class="reference external" href="https://www.doxygen.nl">Doxygen</a>: to generate developer’s manual.</p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Tinker GPU User's Manual</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction to the Software</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Installation on Your Computer</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinker.html">Build the Canonical Tinker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinkergpu.html">Build Tinker GPU</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../feat/index.html">Special Features &amp; Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../key/index.html">Use of the Keyword Control File</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Installation on Your Computer</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Installation on Your Computer</a></li>
+      <li>Next: <a href="tinker.html" title="next chapter">Build the Canonical Tinker</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Zhi Wang.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/m/install/preq.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
